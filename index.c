@@ -21,30 +21,37 @@ void movimentoDaRainha() {
     printf("total de %d casas andando para a esquerda.\n", rainha - 1);
 }
 
-// função de movimento do cavalo
-void movimentoDoCavalo() {
-    int cavalo, cima;
-    for (cavalo = 1; cavalo <= 1; cavalo++) {
+
+void movimentoDoCavalo(int numeroDeMovimentos) {
+    int cima, direita;
+    if (numeroDeMovimentos > 0) {
         printf("\nCavalo para:\n");
         for (cima = 1; cima <= 2; cima++) {
             printf("Cima. \n");
+            for (direita = 1; direita <= 1 && cima != 1; direita++) {
+                printf("Direita. \n");
+            }
         }
-        printf("Direita. \n");
+    printf("Total de %d casas andando para cima e %d para direita.\n", cima - 1, direita - 1);
+
+        movimentoDoCavalo(numeroDeMovimentos - 1);
     }
-    printf("Total de %d casas andando para cima e %d para direita.\n", cima-1, cavalo-1);
 
 }
 
 // função de movimento do bispo
 void movimentoDoBispo(int numeroDeMovimentos) {
+    int cima, direita;
     if (numeroDeMovimentos > 0) {
-        for (int cima = 1; cima <= 1; cima++) {
+        for (cima = 2; cima <= 2; cima++) {
             printf("Cima. \n");
-            for (int direita = 1; direita <= 1; direita++) {
+            for (direita = 1; direita < cima; direita++) {
                 printf("Direita. \n");
             }
         }
+
         movimentoDoBispo(numeroDeMovimentos - 1);
+
     }
 
 }
@@ -53,16 +60,16 @@ int main() {
     // Movimentos da torre
     movimentoDaTorre();
 
-    // Movimentos do Bispo
-    printf("\nBispo para: \n");
-    movimentoDoBispo(5);
-    printf("Total de 5 casas andando para a diagonal cima/direita.\n");
-
     // Movimentos da Rainha
     movimentoDaRainha();
 
     // Movimentos do Cavalo
-    movimentoDoCavalo();
+    movimentoDoCavalo(1);
+
+    // Movimentos do Bispo
+     printf("\nBispo para: \n");
+    movimentoDoBispo(5);
+     printf("Total de 5 casas andando para a diagonal cima/direita.\n");
 
     return 0;
 }
